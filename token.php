@@ -6,7 +6,7 @@ header('Access-Control-Allow-Origin: *'); // Allow your frontend to call this
 // ⚠️ REPLACE THESE WITH YOUR ACTUAL DETAILS
 $client_id = '1567812331554209862';
 $client_secret = getenv('lBzqqIt3ZM0CUUV9LAlYmF3zgfrVnDS3'); // Or hardcode if not using env vars
-$redirect_uri = 'https://your-app-name.deplexo.com/'; // Your website URL (no trailing slash)
+$redirect_uri = 'https://suchirpc.de.deplexo.com/'; // Your website URL (no trailing slash)
 
 // Get the code sent from the frontend
 $data = json_decode(file_get_contents('php://input'), true);
