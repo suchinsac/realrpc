@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPC Studio | Custom Discord Presence</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">✨ RPC Studio <span style="font-size: 0.7rem; color: var(--text-muted);">by SUCHI 24/7</span></a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="https://discord.gg/pvtBvKUKC8" target="_blank" class="nav-discord">Support Server</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="badge">Powered by Discord OAuth2</span>
+            <h1>Customize Your <span class="highlight">Discord Rich Presence</span></h1>
+            <p class="hero-subtitle">
+                Link your account securely and broadcast what you're playing, coding, or listening to. No downloads required. 
+                <strong>Requires the Discord Desktop App to be open.</strong>
+            </p>
+            
+            <!-- Auth Section -->
+            <div id="auth-section" class="auth-box">
+                <button id="loginBtn" class="btn btn-primary">🔗 Link Discord Account</button>
+                <p id="authStatus" class="status-text"></p>
+            </div>
+        </div>
+    </header>
+
+    <!-- RPC Editor Section (Hidden by default) -->
+    <section id="editor-section" class="section hidden">
+        <div class="container">
+            <div class="card">
+                <div class="editor-header">
+                    <h2>Design Your Presence</h2>
+                    <button id="clearBtn" class="btn btn-danger btn-small">Clear Status</button>
+                </div>
+                
+                <div class="editor-grid">
+                    <div class="form-container">
+                        <!-- Presets -->
+                        <div class="form-group">
+                            <label>Quick Presets</label>
+                            <div class="preset-buttons">
+                                <button type="button" class="btn btn-preset" data-preset="gaming">🎮 Gaming</button>
+                                <button type="button" class="btn btn-preset" data-preset="coding">💻 Coding</button>
+                                <button type="button" class="btn btn-preset" data-preset="music">🎵 Music</button>
+                            </div>
+                        </div>
+
+                        <form id="rpcForm">
+                            <div class="form-group">
+                                <label>Activity Type</label>
+                                <select id="activityType">
+                                    <option value="0">Playing</option>
+                                    <option value="2">Listening to</option>
+                                    <option value="3">Watching</option>
+                                    <option value="5">Competing in</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Line 2 (Details)</label>
+                                <input type="text" id="detailsInput" maxlength="128" placeholder="e.g. Surviving in a new world">
+                            </div>
+                            <div class="form-group">
+                                <label>Line 3 (State)</label>
+                                <input type="text" id="stateInput" maxlength="128" placeholder="e.g. Building a house">
+                            </div>
+                            <div class="form-group">
+                                <label>Large Image Key</label>
+                                <input type="text" id="largeImageInput" maxlength="128" placeholder="e.g. minecraft_logo">
+                            </div>
+                            <div class="form-group">
+                                <label>Large Image Text</label>
+                                <input type="text" id="largeTextInput" maxlength="128" placeholder="e.g. Minecraft">
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-1" id="updateBtn">Update Presence</button>
+                        </form>
+                    </div>
+
+                    <!-- Live Preview -->
+                    <div class="preview-container">
+                        <label>Live Preview</label>
+                        <div class="discord-card">
+                            <div class="discord-header"><span id="previewType">Playing</span> <span id="previewAppName">RPC Studio</span></div>
+                            <div class="discord-body">
+                                <div class="discord-images">
+                                    <div class="large-img" id="previewLargeImg">?</div>
+                                </div>
+                                <div class="discord-text">
+                                    <div class="discord-title">RPC Studio</div>
+                                    <div class="discord-details" id="previewDetails">Details...</div>
+                                    <div class="discord-state" id="previewState">State...</div>
+                                    <div class="discord-time" id="previewTime">00:00 elapsed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p id="updateStatus" class="status-text text-center mt-1"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Why Use RPC Studio?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Official OAuth2</h3>
+                    <p>We use Discord's official <code>openid</code> and <code>sdk.social_layer_presence</code> scopes. Your token is never exposed to third parties.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Setup</h3>
+                    <p>No software to install. Click, authorize, and your status updates immediately. Works on any modern browser.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>Fully Customizable</h3>
+                    <p>Change the game name, details, state, and images. The code is open for you to customize for any game.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Privacy First</h3>
+                    <p>We only request the permissions needed for Rich Presence. Your token is stored locally in your browser, not on our servers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 SUCHI 24/7. All rights reserved.</p>
+            <p>
+                <a href="https://discord.gg/pvtBvKUKC8" target="_blank">Join our Discord</a> |
+                <a href="https://discord.com/developers/applications" target="_blank">Discord Developer Portal</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/discord-rpc/browser.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
