@@ -1,0 +1,6 @@
+version: 1
+type: web
+build:
+  framework: dockerfile
+run:
+  port: 3000
